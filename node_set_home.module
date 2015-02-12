@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * @file
+ * Node set home.
+ */
+
+/**
+ * Defines a new permission
+ *
+ * Implements hook_permission().
+ */
+function node_set_home_permission() {
+  return array(
+    'node set home' => array(
+      'title' => t('Mark a node as homepage'),
+      'description' => t("User can force a node from module's predefined list to be homepage"),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function node_set_home_menu() {
+  $items = array();
+
+  $items['admin/content/define-homepage'] = array(
+    'title' => 'Define homepage',
+    'page callback' => 'node_set_home_show_home_selector_page',
+    'access arguments' => array('node set home'),
+    'menu_name' => 'management',
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'node_set_home.pages.inc',
+  );
+
+  // Module's admin pages.
+  $items['admin/config/system/node_set_home'] = array(
+    'title' => 'Node set home',
+    'description' => 'Change renderer of page',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('node_set_home_admin_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'node_set_home.admin.inc',
+  );
+
+  return $items;
+}

@@ -1,0 +1,6 @@
+name = Node set home
+description = Allow users with permission to force a node from module's predefined list to be homepage
+package = Administration
+core = 7.x
+
+configure = admin/config/system/node_set_home
