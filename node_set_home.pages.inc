@@ -70,5 +70,6 @@ function node_set_home_select_homepage_form($form, &$form_state) {
 function node_set_home_select_homepage_form_submit($form, &$form_state) {
   if (!empty($form_state['values']['site_frontpage'])) {
     variable_set('site_frontpage', 'node/' . $form_state['values']['site_frontpage']);
+    drupal_set_message(t('New homepage has been set'));
   }
 }
